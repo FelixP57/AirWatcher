@@ -57,7 +57,7 @@ Provider::Provider ( const Provider & unProvider )
 } //----- Fin de Provider (constructeur de copie)
 
 
-Provider::Provider ( const User & user, const vector<string> & cleanerIds ) : User(user), cleanerIds(cleanerIds)
+Provider::Provider ( string userId, string login, string hashedPassword, Role role, const vector<string> & cleanerIds ) : User(userId, login, hashedPassword, role), cleanerIds(cleanerIds)
 // Algorithme :
 //
 {

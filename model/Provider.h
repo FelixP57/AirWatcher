@@ -51,7 +51,7 @@ public:
     // Contrat :
     //
 
-    Provider ( const User & user, const vector<string> & cleanerIds );
+    Provider ( string userId, string login, string hashedPassword, Role role, const vector<string> & cleanerIds );
     // Mode d'emploi :
     //
     // Contrat :

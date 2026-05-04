@@ -91,20 +91,13 @@ PrivateUser::PrivateUser ( const PrivateUser & unPrivateUser )
 } //----- Fin de PrivateUser (constructeur de copie)
 
 
-PrivateUser::PrivateUser ( string userId, string sensorId, string login, string hashedPassword, Role role )
+PrivateUser::PrivateUser ( string userId, string sensorId, string login, string hashedPassword, Role role ) : User(userId, login, hashedPassword, role), sensorId(sensorId), points(0), isBlocked(false)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <PrivateUser>" << endl;
 #endif
-    this->userId = userId;
-    this->sensorId = sensorId;
-    this->login = login;
-    this->hashedPassword = hashedPassword;
-    this->role = role;
-    this->points = 0;
-    this->isBlocked = false;
 } //----- Fin de PrivateUser
 
 
