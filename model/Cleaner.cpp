@@ -70,6 +70,13 @@ string Cleaner::getProviderId ( ) const
 } //----- Fin de getProviderId
 
 
+void Cleaner::setProviderId ( string providerId )
+// Algorithme :
+//
+{
+    this->providerId = providerId;
+} //----- Fin de setProviderId
+
 //------------------------------------------------- Surcharge d'opérateurs
 Cleaner & Cleaner::operator = ( const Cleaner & unCleaner )
 // Algorithme :

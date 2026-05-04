@@ -54,6 +54,10 @@ public:
     // Mode d'emploi : Retourne l'ID du provider
     // Contrat : aucun
 
+    void setProviderId ( string providerId );
+    // Mode d'emploi : Définit l'ID du provider
+    // Contrat : aucun
+
 //------------------------------------------------- Surcharge d'opérateurs
     Cleaner & operator = ( const Cleaner & unCleaner );
     // Mode d'emploi :

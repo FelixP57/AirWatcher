@@ -36,6 +36,10 @@ public:
     // Mode d'emploi : Retourne la liste des IDs des cleaners
     // Contrat : aucun
 
+    void setCleanerIds ( const vector<string> & cleanerIds );
+    // Mode d'emploi : Définit la liste des IDs des cleaners
+    // Contrat : aucun 
+
 //------------------------------------------------- Surcharge d'opérateurs
     Provider & operator = ( const Provider & unProvider );
     // Mode d'emploi :

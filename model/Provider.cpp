@@ -29,6 +29,13 @@ vector<string> Provider::getCleanerIds ( ) const
     return cleanerIds;
 } //----- Fin de getCleanerIds
 
+void Provider::setCleanerIds ( const vector<string> & cleanerIds )
+// Algorithme : 
+//
+{
+    this->cleanerIds = cleanerIds;
+} //----- Fin de setCleanerIds
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 Provider & Provider::operator = ( const Provider & unProvider )
