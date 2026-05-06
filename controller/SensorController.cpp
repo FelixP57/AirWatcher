@@ -9,30 +9,24 @@ SensorController::SensorController() {}
 SensorController::~SensorController() {}
 
 ReliabilityReport SensorController::handleAnalyzeReliability(string sensorId) {
-    SensorDAO sensorDAO = new SensorDAO();
-    
-    Sensor sensor = sensorDAO.getSensorById(sensorId);
+    SensorDAO *sensorDAO = new SensorDAO();
+    MeasurementDAO *measurementDAO = new MeasurementDAO();
+    UserDAO *userDAO = new UserDAO();
+
+    Sensor sensor = sensorDAO->getSensorById(sensorId);
 
     delete sensorDAO;
 
     if (!sensor.isPrivate()) {
         // return exception of null reliability report
-        return nullptr;
+        return ReliabilityReport{};
     }
 
-    SensorAnalysisService service = new SensorAnalysisService();
+    SensorAnalysisService *service = new SensorAnalysisService(*sensorDAO, *measurementDAO, *userDAO);
 
-    ReliabilityReport report = service.analyzeReliability(sensorId);
+    ReliabilityReport report = service->analyzeReliability(sensorId);
 
     delete service;
 
     return report;
-}
-
-void SensorController::handleMarkUnreliable(string sensorId) {
-    SensorAnalysisService service = new SensorAnalysisService();
-
-    service.markUnreliable(sensorId);
-
-    delete service;
 }

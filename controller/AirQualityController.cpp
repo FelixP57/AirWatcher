@@ -5,45 +5,55 @@
 #include "../service/AirQualityService.h"
 #include "../service/SensorAnalysisService.h"
 #include "../service/PointsService.h"
+#include "../data/UserDAO.h"
+#include "../data/SensorDAO.h"
+#include "../data/MeasurementDAO.h"
 
 AirQualityController::AirQualityController() {}
 
 AirQualityController::~AirQualityController() {}
 
-AtmoResult AirQualityController::handleComputeZone(string userId, int lat, int lon, int radius, string from, string to) {   
-    AirQualityService airService = new AirQualityService();
+AtmoResult AirQualityController::handleComputeZone(const string& userId, int lat, int lon, int radius, const string& from, const string& to) {   
+    SensorDAO *sensorDAO = new SensorDAO();
+    MeasurementDAO *measurementDAO = new MeasurementDAO();
+    UserDAO *userDAO = new UserDAO();
+
+    PointsService *pointsService = new PointsService(*userDAO);
+    AirQualityService *airService = new AirQualityService(*sensorDAO, *measurementDAO, *pointsService);
     
-    AtmoResult meanAtmo = service.computeMeanAtmo(lat, lon, radius, from, to);
+    AtmoResult meanAtmo = airService->computeMeanAtmo(lat, lon, radius, from, to);
 
     delete airService;
-
-    PointsService pointsService = new PointsService();
-    pointsService.awardPoints(meanAtmo.get(2), userId);
-
+    delete measurementDAO;
     delete pointsService;
 
     return meanAtmo;
 }
 
-AtmoResult AirQualityController::handleComputePoint(string userId, int lat, int lon, int radius, string from, string to) {   
-    AirQualityService airService = new AirQualityService();
+PointAtmoResult AirQualityController::handleComputePoint(const string& userId, int lat, int lon, const string& timestamp) {   
+    SensorDAO *sensorDAO = new SensorDAO();
+    MeasurementDAO *measurementDAO = new MeasurementDAO();
+    UserDAO *userDAO = new UserDAO();
+
+    PointsService *pointsService = new PointsService(*userDAO);
+    AirQualityService *airService = new AirQualityService(*sensorDAO, *measurementDAO, *pointsService);
     
-    AtmoResult meanAtmo = service.computeMeanAtmo(lat, lon, radius, from, to);
+    PointAtmoResult pointAtmo = airService->computeAtmoAtPoint(lon, lat, timestamp);
 
     delete airService;
-
-    PointsService pointsService = new PointsService();
-    pointsService.awardPoints(meanAtmo.sensorIds, userId);
-
+    delete measurementDAO;
     delete pointsService;
 
-    return meanAtmo;
+    return pointAtmo;
 }
 
-vector<pair<string, double>> handleRankSensors(string sensorId, string from, string to) {
-    SensorAnalysisService service = new SensorAnalysisService();
+vector<SensorScore> handleRankSensors(const string& sensorId, const string& from, const string& to) {
+    SensorDAO *sensorDAO = new SensorDAO();
+    MeasurementDAO *measurementDAO = new MeasurementDAO();
+    UserDAO *userDAO = new UserDAO();
+    SensorAnalysisService *service = new SensorAnalysisService(*sensorDAO, *measurementDAO, *userDAO);
 
-    vector<pair<string, double>> result = service.rankBySimilarity(sensorId, from, to);
+    vector<SensorScore> result = service->rankBySimilarity(sensorId, from, to);
 
     delete service;
 

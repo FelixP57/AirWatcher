@@ -8,7 +8,6 @@ class SensorController
 {
 public:
     ReliabilityReport handleAnalyzeReliability(string sensorId);
-    void handleMarkUnreliable(string sensorId);
     SensorController();
     ~SensorController();
 

@@ -7,6 +7,7 @@
 #include <chrono>
 #include <ctime>
 #include <cstdio>
+#include <vector>
 using namespace std;
 
 CleanerService::CleanerService ( CleanerDAO& cleanerDAO,

@@ -8,9 +8,9 @@ AuthController::AuthController() {}
 AuthController::~AuthController() {}
 
 User AuthController::handleLogin(string username, string password) {
-    UserDAO userDAO = new UserDAO();
+    UserDAO *userDAO = new UserDAO();
 
-    User user = userDAO.authenticate(username, password);
+    User user = userDAO->authenticate(username, password);
 
     delete userDAO;
 

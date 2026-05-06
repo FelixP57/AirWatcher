@@ -8,9 +8,9 @@ using namespace std;
 class AirQualityController
 {
 public:
-    AtmoResult handleComputeZone(string userId, int lat, int lon, int radius, string from, string to);
-    AtmoResult handleComputePoint(string userId, int lat, int lon, string from, string to);
-    vector<pair<string, double>> handleRankSensors(string sensorId, string from, string to);
+    AtmoResult handleComputeZone(const string& userId, int lat, int lon, int radius, const string& from, const string& to);
+    PointAtmoResult handleComputePoint(const string& userId, int lat, int lon, const string& timestamp);
+    vector<SensorScore> handleRankSensors(const string& sensorId, const string& from, const string& to);
     AirQualityController();
     ~AirQualityController();
 
