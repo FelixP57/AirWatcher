@@ -75,4 +75,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <CleanerDAO>
 
 #endif // CLEANERDAO_H
-

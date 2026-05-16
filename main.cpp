@@ -1,6 +1,9 @@
 #include <iostream>
 #include "data/CleanerDAO.h"
-int main() {
+#include "data/MeasurementDAO.h"
+
+void testCleanerDAO() {
+    
     CleanerDAO cleanerDAO;
     printf("Loading providers and cleaners from CSV files...\n");
     cleanerDAO.loadCleanersFromCSV("dataset/cleaners.csv");
@@ -31,7 +34,59 @@ int main() {
         cout << "Time Stop: " << cleaner.getTimestampStop() << endl;
         cout << "Provider ID: " << cleaner.getProviderId() << endl;
     }
+}
 
+void testMeasurementDAO() {
+    MeasurementDAO measurementDAO;
+    printf("Loading measurements from CSV file...\n");
+    measurementDAO.loadMeasurementsFromCSV("dataset/measurements.csv");
+    printf("Measurements loaded successfully.\n");
+
+    cout << "------------------------------" << endl;
+    cout << "Testing getMeasurements method..." << endl;
+    vector<Measurement> measurements = measurementDAO.getMeasurements("Sensor0", "2019-01-01 00:00:00", "2019-12-31 23:59:59");
+    
+    for (const auto& measurement : measurements) {
+        cout << "Measurement - Timestamp: " << measurement.getTimestamp() << endl;
+        cout << "Sensor ID: " << measurement.getSensorId() << endl;
+        cout << "Attribute ID: " << measurement.getAttributeId() << endl;
+        cout << "Value: " << measurement.getValue() << endl;
+        cout << "Is Valid: " << measurement.getIsValid() << endl;
+        cout << "-------------------------------" << endl;
+    }
+
+    cout << "------------------------------" << endl;
+    cout << "Testing getValidMeasurements method..." << endl;
+    vector<Measurement> validMeasurements = measurementDAO.getValidMeasurements({"Sensor0"}, "2019-01-01 00:00:00", "2019-12-31 23:59:59");
+    
+    for (const auto& measurement : validMeasurements) {
+        cout << "Measurement - Timestamp: " << measurement.getTimestamp() << endl;
+        cout << "Sensor ID: " << measurement.getSensorId() << endl;
+        cout << "Attribute ID: " << measurement.getAttributeId() << endl;
+        cout << "Value: " << measurement.getValue() << endl;
+        cout << "Is Valid: " << measurement.getIsValid() << endl;
+        cout << "-------------------------------" << endl;
+    }
+
+    cout << "------------------------------" << endl;
+    cout << "Testing addMeasurements method..." << endl;
+    Measurement newMeasurement("2020-01-01 12:00:00", "Sensor0", "Attribute0", 42.0, false);
+    measurementDAO.appendMeasurement(newMeasurement);
+    vector<Measurement> updatedMeasurements = measurementDAO.getMeasurements("Sensor0", "2020-01-01 00:00:00", "2020-12-31 23:59:59");
+
+    for (const auto& measurement : updatedMeasurements) {
+        cout << "Measurement - Timestamp: " << measurement.getTimestamp() << endl;
+        cout << "Sensor ID: " << measurement.getSensorId() << endl;
+        cout << "Attribute ID: " << measurement.getAttributeId() << endl;
+        cout << "Value: " << measurement.getValue() << endl;
+        cout << "Is Valid: " << measurement.getIsValid() << endl;
+        cout << "-------------------------------" << endl;
+    }
+}
+
+int main() {
+    // testCleanerDAO();
+    // testMeasurementDAO();
 
     return 0;
 }

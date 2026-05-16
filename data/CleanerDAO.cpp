@@ -120,6 +120,8 @@ void CleanerDAO::loadCleanersFromCSV(string filename) {
             }
 
         }
+
+        file.close();
     }
 
 void CleanerDAO::loadProvidersFromCSV(string filename) {
@@ -179,6 +181,7 @@ void CleanerDAO::loadProvidersFromCSV(string filename) {
             }
 
         }
+        file.close();
     }
 
 Cleaner* CleanerDAO::getCleanerById(string cleanerId) {
