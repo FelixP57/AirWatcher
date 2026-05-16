@@ -49,15 +49,10 @@ Provider & Provider::operator = ( const Provider & unProvider )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Provider::Provider ( const Provider & unProvider )
+Provider::Provider ( const Provider & unProvider ) : User(unProvider), cleanerIds(unProvider.cleanerIds)
 // Algorithme :
 //
 {
-    this->userId = unProvider.userId;
-    this->login = unProvider.login;
-    this->hashedPassword = unProvider.hashedPassword;
-    this->role = unProvider.role;
-    this->cleanerIds = unProvider.cleanerIds;
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Provider>" << endl;
 #endif

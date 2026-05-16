@@ -74,17 +74,10 @@ PrivateUser & PrivateUser::operator = ( const PrivateUser & unPrivateUser )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-PrivateUser::PrivateUser ( const PrivateUser & unPrivateUser )
+PrivateUser::PrivateUser ( const PrivateUser & unPrivateUser ) : User(unPrivateUser), sensorId(unPrivateUser.sensorId), points(unPrivateUser.points), isBlocked(unPrivateUser.isBlocked)
 // Algorithme :
 //
 {
-    this->userId = unPrivateUser.userId;
-    this->login = unPrivateUser.login;
-    this->hashedPassword = unPrivateUser.hashedPassword;
-    this->role = unPrivateUser.role;
-    this->sensorId = unPrivateUser.sensorId;
-    this->points = unPrivateUser.points;
-    this->isBlocked = unPrivateUser.isBlocked;
 #ifdef MAP
     cout << "Appel au constructeur de copie de <PrivateUser>" << endl;
 #endif
