@@ -26,7 +26,11 @@ void PrivateUser::addPoints(int pointsToAdd)
 // Algorithme :
 //
 {
-    points += pointsToAdd;
+    if (!isBlocked) {
+        points += pointsToAdd;
+    } else {
+        cout << "User is blocked. Cannot add points." << endl;
+    }
 }
 
 void PrivateUser::blockPointAccumulation()

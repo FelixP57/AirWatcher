@@ -39,6 +39,8 @@ public:
 //----------------------------------------------------- Méthodes publiques
     void loadMeasurementsFromCSV(string filename);
 
+    void loadAttributesFromCSV(string filename);
+
     vector<Measurement> getMeasurements(string sensorId, string from, string to);
 
     vector<Measurement> getValidMeasurements(vector<string> sensorIds, string from, string to);

@@ -92,6 +92,42 @@ void MeasurementDAO::loadMeasurementsFromCSV(string filename) {
     file.close();
 }
 
+void MeasurementDAO::loadAttributesFromCSV(string filename) {
+    ifstream file(filename);
+    string line;
+
+    if (file.is_open()) {
+        while (!file.eof()) {
+
+            if (file.peek() == EOF) {
+                break; // Exit the loop if we have reached the end of the file
+            }
+
+            cout << "-------------------------------" << endl;
+            cout << "Reading attribute data..." << endl;
+
+            getline(file, line, ';');
+            string attributeId = line;
+            cout << "Attribute ID: " << attributeId << endl;
+
+            getline(file, line, ';');
+            string unit = line;
+            cout << "Unit: " << unit << endl;
+
+            getline(file, line, ';');
+            string description = line;
+            cout << "Description: " << description << endl;
+
+            getline(file, line, '\n'); // Get rid of the newline character
+
+            cout << "-------------------------------" << endl;
+
+        }
+    }
+
+    file.close();
+}
+
 vector<Measurement> MeasurementDAO::getMeasurements(string sensorId, string from, string to) {
     vector<Measurement> allMeasurements;
     Date fromDate = parseDate(from);

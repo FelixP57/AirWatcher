@@ -38,12 +38,12 @@ string Sensor::getOwnerId ( ) const
 } //----- Fin de getOwnerId
 
 
-void Sensor::setOwnerId ( string ownerId )
+void Sensor::setIsReliable ( bool isReliable )
 // Algorithme :
 //
 {
-    this->ownerId = ownerId;
-} //----- Fin de setOwnerId
+    this->isReliable = isReliable;
+} //----- Fin de setIsReliable
 
 
 string Sensor::getSensorId ( ) const

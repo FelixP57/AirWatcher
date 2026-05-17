@@ -38,8 +38,8 @@ public:
     // Mode d'emploi : Retourne l'ID du propriétaire du sensor
     // Contrat : aucun
 
-    void setOwnerId ( string ownerId );
-    // Mode d'emploi : Définit l'ID du propriétaire du sensor
+    void setIsReliable ( bool isReliable );
+    // Mode d'emploi : Définit si le sensor est fiable
     // Contrat : aucun
 
     string getSensorId ( ) const;
